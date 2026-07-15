@@ -1633,6 +1633,7 @@
       if (key && state[key]) item.classList.add('checked');
 
       item.addEventListener('click', function(e) {
+        e.preventDefault();
         this.classList.toggle('checked');
         const s = loadState();
         s[this.dataset.key] = this.classList.contains('checked');
