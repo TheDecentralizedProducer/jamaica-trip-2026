@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Grants · Jamaica 2026</title>
+<style>
+  @page {
+    size: letter landscape;
+    margin: 0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0A0A0A;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page1 {
+    width: 11in;
+    height: 8.5in;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: #0A0A0A;
+    border-bottom: 3px solid #FFD700;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .flag-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    display: flex;
+  }
+  .flag-bar span { flex: 1; }
+  .flag-bar .g { background: #006400; }
+  .flag-bar .y { background: #FFD700; }
+  .flag-bar .b { background: #111; }
+
+  .header-left { display: flex; align-items: baseline; gap: 12px; }
+
+  .brand {
+    font-size: 26pt;
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .brand .the { color: #aaa; font-size: 14pt; font-weight: 400; margin-right: 4px; }
+  .brand .grants { color: #FFD700; }
+  .brand .dot { color: #444; margin: 0 6px; }
+  .brand .jamaica { color: #fff; }
+  .brand .year { color: #006400; font-size: 14pt; font-weight: 700; margin-left: 8px; }
+
+  .header-center {
+    text-align: center;
+  }
+  .header-center .sub {
+    font-size: 8pt;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #555;
+  }
+  .header-center .hotel {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+
+  .header-right {
+    text-align: right;
+    font-size: 8pt;
+    color: #555;
+    letter-spacing: 1px;
+    line-height: 1.8;
+  }
+  .header-right .flight {
+    color: #FFD700;
+    font-weight: 700;
+    font-size: 9pt;
+  }
+
+  /* ── COLUMNS ── */
+  .columns {
+    display: flex;
+    flex: 1;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #1e1e1e;
+    overflow: hidden;
+  }
+  .col:last-child { border-right: none; }
+
+  .col-header {
+    padding: 10px 14px 8px;
+    border-bottom: 2px solid #1e1e1e;
+    flex-shrink: 0;
+  }
+
+  .col-day {
+    font-size: 7.5pt;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 1px;
+  }
+
+  .col-title {
+    font-size: 13pt;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+
+  .col-badge {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 6.5pt;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  .badge-arrival  { background: rgba(0,100,0,0.3);   color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+  .badge-party    { background: rgba(255,215,0,0.12); color: #FFD700; border: 1px solid rgba(255,215,0,0.3); }
+  .badge-raft     { background: rgba(59,130,246,0.15);color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); }
+  .badge-chukka   { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
+
+  /* ── EVENTS ── */
+  .col-events {
+    flex: 1;
+    overflow: hidden;
+    padding: 6px 0;
+  }
+
+  .evt {
+    display: flex;
+    gap: 8px;
+    padding: 5px 14px;
+    align-items: flex-start;
+  }
+
+  .evt-time {
+    font-size: 7pt;
+    font-weight: 700;
+    color: #FFD700;
+    min-width: 38px;
+    padding-top: 1px;
+    letter-spacing: 0.3px;
+    flex-shrink: 0;
+  }
+
+  .evt-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #006400;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .evt-dot.gold   { background: #FFD700; }
+  .evt-dot.blue   { background: #60a5fa; }
+  .evt-dot.red    { background: #f87171; }
+  .evt-dot.purple { background: #c084fc; }
+  .evt-dot.gray   { background: #444; }
+
+  .evt-body { flex: 1; min-width: 0; }
+
+  .evt-title {
+    font-size: 8.5pt;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #fff;
+  }
+
+  .evt-detail {
+    font-size: 7pt;
+    color: #666;
+    line-height: 1.3;
+    margin-top: 1px;
+  }
+
+  .evt-tag {
+    display: inline-block;
+    margin-top: 3px;
+    font-size: 6pt;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 1px 6px;
+    border-radius: 20px;
+  }
+  .tag-g  { background: rgba(0,100,0,0.2);   color: #4ade80; }
+  .tag-y  { background: rgba(255,215,0,0.1); color: #FFD700; }
+  .tag-r  { background: rgba(239,68,68,0.15);color: #f87171; }
+  .tag-p  { background: rgba(168,85,247,0.15);color: #c084fc; }
+
+  .divider {
+    height: 1px;
+    background: #1a1a1a;
+    margin: 2px 14px;
+  }
+
+  /* ── FOOTER / DEPARTURE ── */
+  .footer {
+    background: #111;
+    border-top: 2px solid #1e1e1e;
+    padding: 8px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .footer-day {
+    font-size: 7pt;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #444;
+  }
+
+  .footer-title {
+    font-size: 10pt;
+    font-weight: 900;
+    color: #fff;
+  }
+
+  .footer-events {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .footer-evt {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .footer-evt-time {
+    font-size: 7.5pt;
+    font-weight: 700;
+    color: #FFD700;
+  }
+
+  .footer-evt-label {
+    font-size: 7.5pt;
+    color: #888;
+  }
+
+  .footer-sep {
+    color: #333;
+    font-size: 16pt;
+    line-height: 1;
+  }
+
+  .footer-right {
+    text-align: right;
+    font-size: 7pt;
+    color: #444;
+    line-height: 1.7;
+  }
+  .footer-right strong { color: #666; }
+
+  /* ══ PAGE 2 ══ */
+  .page2 {
+    width: 11in;
+    height: 8.5in;
+    background: #0A0A0A;
+    display: flex;
+    flex-direction: column;
+    page-break-before: always;
+    overflow: hidden;
+  }
+
+  .p2-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 20px 8px;
+    gap: 10px;
+    overflow: hidden;
+  }
+
+  .p2-section-label {
+    font-size: 7pt;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #FFD700;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .p2-dining {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .rc {
+    background: #161616;
+    border: 1px solid #252525;
+    border-top: 2px solid #006400;
+    border-radius: 6px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .rc.gold { border-top-color: #FFD700; }
+
+  .rc-top { display: flex; align-items: flex-start; gap: 8px; }
+  .rc-icon { font-size: 16pt; line-height: 1; flex-shrink: 0; }
+  .rc-name { font-size: 9pt; font-weight: 800; color: #fff; line-height: 1.2; }
+  .rc-type { font-size: 7pt; color: #555; margin-top: 1px; }
+  .rc-desc { font-size: 7pt; color: #666; line-height: 1.4; }
+  .rc-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 2px; }
+
+  .rtag {
+    font-size: 6pt;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    text-transform: uppercase;
+  }
+  .rtag-red    { background: rgba(239,68,68,0.15);  color: #f87171; }
+  .rtag-yellow { background: rgba(255,215,0,0.1);   color: #FFD700; }
+  .rtag-green  { background: rgba(0,100,0,0.2);     color: #4ade80; }
+  .rtag-purple { background: rgba(168,85,247,0.15); color: #c084fc; }
+
+  .p2-bottom { display: flex; gap: 12px; flex: 1; overflow: hidden; }
+
+  .p2-amenities { flex: 1; display: flex; flex-direction: column; }
+
+  .amenity-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: #161616;
+    border: 1px solid #252525;
+    border-radius: 6px;
+    padding: 10px 12px;
+    flex: 1;
+  }
+
+  .am { display: flex; align-items: flex-start; gap: 8px; }
+  .am-icon { font-size: 14pt; flex-shrink: 0; line-height: 1; }
+  .am-name { font-size: 8.5pt; font-weight: 700; color: #fff; line-height: 1.2; }
+  .am-detail { font-size: 7pt; color: #555; line-height: 1.3; margin-top: 1px; }
+
+  .p2-logistics { flex: 1.4; display: flex; flex-direction: column; }
+
+  .lg-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    background: #161616;
+    border: 1px solid #252525;
+    border-radius: 6px;
+    padding: 10px 12px;
+    flex: 1;
+  }
+
+  .lg { display: flex; flex-direction: column; gap: 2px; }
+  .lg-label { font-size: 7.5pt; font-weight: 800; color: #FFD700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .lg-val { font-size: 7pt; color: #666; line-height: 1.4; }
+
+  .p2-footer {
+    background: #111;
+    border-top: 1px solid #1e1e1e;
+    padding: 7px 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 7pt;
+    color: #444;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="page1">
+
+<!-- ── HEADER ── -->
+<div class="flag-bar">
+  <span class="g"></span><span class="y"></span><span class="b"></span><span class="y"></span><span class="g"></span>
+</div>
+<header class="header">
+  <div class="header-left">
+    <div class="brand">
+      <span class="the">The</span><span class="grants">Grants</span><span class="dot">·</span><span class="jamaica">Jamaica</span><span class="year">2026</span>
+    </div>
+  </div>
+  <div class="header-center">
+    <div class="sub">July 24 – 28, 2026</div>
+    <div class="hotel">Ocean Eden Bay · Coral Spring, Trelawny</div>
+  </div>
+  <div class="header-right">
+    <div class="flight">JetBlue B6 279 · JFK→MBJ · 9:59am</div>
+    <div>Arrive 1:14pm · Nonstop · 4hr 15min</div>
+    <div>Booking Ref: CN04-016395</div>
+  </div>
+</header>
+
+<!-- ── 4 DAY COLUMNS ── -->
+<div class="columns">
+
+  <!-- FRIDAY -->
+  <div class="col">
+    <div class="col-header" style="border-top: 3px solid #4ade80;">
+      <div class="col-day">Friday · July 24</div>
+      <div class="col-title">Arrival Day</div>
+      <span class="col-badge badge-arrival">Touch Down</span>
+    </div>
+    <div class="col-events">
+      <div class="evt">
+        <div class="evt-time">9:59a</div>
+        <div class="evt-dot gold"></div>
+        <div class="evt-body">
+          <div class="evt-title">Depart JFK</div>
+          <div class="evt-detail">JetBlue B6 279 · Nonstop</div>
+        </div>
+      </div>
+      <div class="evt">
+        <div class="evt-time">1:14p</div>
+        <div class="evt-dot"></div>
+        <div class="evt-body">
+          <div class="evt-title">Arrive MBJ</div>
+          <div class="evt-detail">Clear customs · arrange transport</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="evt">
+        <div class="evt-time">~2:45p</div>
+        <div class="evt-dot"></div>
+        <div class="evt-body">
+          <div class="evt-title">Runaway Bay</div>
+          <div class="evt-detail">Drop gifts with family · ~39 min from airport</div>
+        </div>
+      </div>
+      <div class="evt">
+        <div class="evt-time">~4:30p</div>
+        <div class="evt-dot"></div>
+        <div class="evt-body">
+          <div class="evt-title">Drive to Ocean Eden Bay</div>
+          <div class="evt-detail">~39 min · Check in · Unpack</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="evt">
+        <div class="evt-time">Evening</div>
+        <div class="evt-dot gold"></div>
+        <div class="evt-body">
+          <div class="evt-title">Dinner at Resort</div>
+          <div class="evt-detail">Marlin (beachfront) or Captain's Market</div>
+          <span class="evt-tag tag-g">No Reservation Needed</span>
+        </div>
+      </div>
+      <div class="evt">
+        <div class="evt-time"></div>
+        <div class="evt-dot gray"></div>
+        <div class="evt-body">
+          <div class="evt-title" style="color:#FFD700">Book at Front Desk</div>
+          <div class="evt-detail">Reserve Senses Dinner Show + Steak House tonight</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SATURDAY -->
+  <div class="col">
+    <div class="col-header" style="border-top: 3px solid #FFD700;">
+      <div class="col-day">Saturday · July 25</div>
+      <div class="col-title">Cole's Chill Spot</div>
+      <span class="col-badge badge-party">Party Day</span>
+    </div>
+    <div class="col-events">
+      <div class="evt">
+        <div class="evt-time">6:00a</div>
+        <div class="evt-dot"></div>
+        <div class="evt-body">
+          <div class="evt-title">Workout · 24hr Gym</div>
+          <div class="evt-detail">Get it done before the drive</div>
+        </div>
+      </div>
+      <div class="evt">
+        <div class="evt-time">7:15a</div>
+        <div class="evt-dot"></div>
+        <div class="evt-body">
+          <div class="evt-title">Breakfast · Captain's Market</div>
+          <div class="evt-detail">Buffet opens 7am · fuel up</div>
+        </div>
+      </div>
+      <div class="evt">
+        <div class="evt-time">8:00a</div>
+        <div class="evt-dot gold"></div>
+        <div class="evt-body">
+          <div class="evt-title">Depart for St. Elizabeth</div>
+          <div class="evt-detail">Top Burnt Ground · ~1.5–2 hr cross-island drive</div>
+          <span class="evt-tag tag-y">South coast · bring snacks</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="evt">
+        <div class="evt-time">10a–6p</div>
+        <div class="evt-dot gold"></div>
+        <div class="evt-body">
+          <div class="evt-title">Back to School Giveaway</div>
+          <div class="evt-detail">Cole's Chill Spot · Pool, bounce house, trampoline, food &amp; prizes</div>
+        </div>
+      </div>
+      <div class="evt">
+        <div class="evt-time">Evening</div>
+        <div class="evt-dot gold"></div>
+        <div class="evt-body">
+          <div class="evt-title">Spada International Sound</div>
+          <div class="evt-detail">Annual evening party · same venue</div>
+        </div>
+      </div>
+      <div class="evt">
+        <div class="evt-time">~11p</div>
+        <div class="evt-dot"></div>
+        <div class="evt-body">
+          <div class="evt-title">Drive Back to Resort</div>
+          <div class="evt-detail">~1.5–2 hr return · consider hiring a driver</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUNDAY -->
+  <div class="col">
+    <div class="col-header" style="border-top: 3px solid #60a5fa;">
+      <div class="col-day">Sunday · July 26</div>
+      <div class="col-title">River Rafting</div>
+      <span class="col-badge badge-raft">On the Water</span>
+    </div>
+    <div class="col-events">
+      <div class="evt">
+        <div class="evt-time">8:00a</div>
+        <div class="evt-dot"></div>
+        <div class="evt-body">
+          <div class="evt-title">Breakfast · Resort</div>
+          <div class="evt-detail">Leisurely morning · Captain's Market 7–11am</div>
+        </div>
+      </div>
+      <div class="evt">
+        <div class="evt-time">9:30a</div>
+        <div class="evt-dot blue"></div>
+        <div class="evt-body">
+          <div class="evt-title">Depart for Martha Brae</div>
+          <div class="evt-detail">Falmouth · ~15–20 min from resort</div>
+        </div>
+      </div>
+      <div class="evt">
+        <div class="evt-time">10:00a</div>
+        <div class="evt-dot blue"></div>
+        <div class="evt-body">
+          <div class="evt-title">Bamboo River Rafting</div>
+          <div class="evt-detail">Private raft for 2 · 3-mile scenic float · 1 hr</div>
+          <span class="evt-tag tag-g">~$110 per raft</span>
+        </div>
+      </div>
+      <div class="evt">
+        <div class="evt-time">11:30a</div>
+        <div class="evt-dot"></div>
+        <div class="evt-body">
+          <div class="evt-title">Return to Resort</div>
+          <div class="evt-detail">Beach · pool · Despacio Spa afternoon</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="evt">
+        <div class="evt-time">Aftn</div>
+        <div class="evt-dot"></div>
+        <div class="evt-body">
+          <div class="evt-title">Despacio Spa</div>
+          <div class="evt-detail">Massage · hydrotherapy · sauna</div>
+          <span class="evt-tag tag-y">Book at check-in</span>
+        </div>
+      </div>
+      <div class="evt">
+        <div class="evt-time">8:00p</div>
+        <div class="evt-dot gold"></div>
+        <div class="evt-body">
+          <div class="evt-title">Senses Dinner Show</div>
+          <div class="evt-detail">Gourmet dinner + live theater · 8pm</div>
+          <span class="evt-tag tag-p">Resort Elegant attire</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MONDAY -->
+  <div class="col">
+    <div class="col-header" style="border-top: 3px solid #f87171;">
+      <div class="col-day">Monday · July 27</div>
+      <div class="col-title">Chukka Good Hope</div>
+      <span class="col-badge badge-chukka">Adventure Day</span>
+    </div>
+    <div class="col-events">
+      <div class="evt">
+        <div class="evt-time">6:00a</div>
+        <div class="evt-dot"></div>
+        <div class="evt-body">
+          <div class="evt-title">Workout · 24hr Gym</div>
+          <div class="evt-detail">Last workout of the trip</div>
+        </div>
+      </div>
+      <div class="evt">
+        <div class="evt-time">7:15a</div>
+        <div class="evt-dot"></div>
+        <div class="evt-body">
+          <div class="evt-title">Breakfast · Captain's Market</div>
+          <div class="evt-detail">Fuel up for a full adventure day</div>
+        </div>
+      </div>
+      <div class="evt">
+        <div class="evt-time">9:00a</div>
+        <div class="evt-dot red"></div>
+        <div class="evt-body">
+          <div class="evt-title">Depart for Chukka</div>
+          <div class="evt-detail">Good Hope, Falmouth · ~10–15 min from resort</div>
+        </div>
+      </div>
+      <div class="evt">
+        <div class="evt-time">9:30a</div>
+        <div class="evt-dot red"></div>
+        <div class="evt-body">
+          <div class="evt-title">Ultimate Explorer Pass</div>
+          <div class="evt-detail">Bamboo Rafting · Zipline · River Tubing · Dune Buggy</div>
+          <span class="evt-tag tag-g">~$139+/person</span>
+          <span class="evt-tag tag-r" style="margin-left:3px">Closed-toe shoes req.</span>
+        </div>
+      </div>
+      <div class="evt">
+        <div class="evt-time">~2:00p</div>
+        <div class="evt-dot"></div>
+        <div class="evt-body">
+          <div class="evt-title">Return to Resort</div>
+          <div class="evt-detail">Pool · beach · last afternoon in Jamaica</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="evt">
+        <div class="evt-time">Evening</div>
+        <div class="evt-dot gold"></div>
+        <div class="evt-body">
+          <div class="evt-title">Final Romantic Dinner</div>
+          <div class="evt-detail">Bluemoon (à la carte) or Steak House</div>
+          <span class="evt-tag tag-p">Smart casual · long trousers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── FOOTER: DEPARTURE ── -->
+<footer class="footer">
+  <div>
+    <div class="footer-day">Tuesday · July 28</div>
+    <div class="footer-title">Departure Day</div>
+  </div>
+  <div class="footer-events">
+    <div class="footer-evt">
+      <div class="footer-evt-time">7:00a</div>
+      <div class="footer-evt-label">Final breakfast</div>
+    </div>
+    <div class="footer-sep">·</div>
+    <div class="footer-evt">
+      <div class="footer-evt-time">8:30a</div>
+      <div class="footer-evt-label">Check out · Ref CN04-016395</div>
+    </div>
+    <div class="footer-sep">·</div>
+    <div class="footer-evt">
+      <div class="footer-evt-time">9:15a</div>
+      <div class="footer-evt-label">Depart for MBJ (~30–35 min)</div>
+    </div>
+    <div class="footer-sep">·</div>
+    <div class="footer-evt">
+      <div class="footer-evt-time">10:00a</div>
+      <div class="footer-evt-label">Arrive airport · check in</div>
+    </div>
+    <div class="footer-sep">·</div>
+    <div class="footer-evt" style="background:rgba(255,215,0,0.08);padding:4px 10px;border-radius:8px;border:1px solid rgba(255,215,0,0.2)">
+      <div class="footer-evt-time">12:19p</div>
+      <div class="footer-evt-label">JetBlue B6 780 · MBJ→JFK · Arrives 5:16pm</div>
+    </div>
+  </div>
+  <div class="footer-right">
+    <strong>Ocean Eden Bay</strong> · +1 876 615 8100<br>
+    Coral Spring, Trelawny, Jamaica 🇯🇲
+  </div>
+</footer>
+
+</div><!-- /page1 -->
+
+<!-- ══════════════════════════════════════════
+     PAGE 2 — RESORT GUIDE
+══════════════════════════════════════════ -->
+<div class="page2">
+
+  <header class="header">
+    <div class="header-left">
+      <div class="brand">
+        <span class="the">The</span><span class="grants">Grants</span><span class="dot">·</span><span class="jamaica">Jamaica</span><span class="year">2026</span>
+      </div>
+    </div>
+    <div class="header-center">
+      <div class="sub">Resort Guide</div>
+      <div class="hotel">Ocean Eden Bay · Adults Only · All Inclusive</div>
+    </div>
+    <div class="header-right">
+      <div class="flight">+1 876 615 8100</div>
+      <div>res.oeb@oceanhotels.com</div>
+      <div>Booking Ref: CN04-016395</div>
+    </div>
+  </header>
+
+  <div class="p2-body">
+
+    <!-- DINING SECTION -->
+    <div class="p2-section-label">Dining</div>
+    <div class="p2-dining">
+
+      <div class="rc gold">
+        <div class="rc-top">
+          <span class="rc-icon">🎭</span>
+          <div>
+            <div class="rc-name">Senses Dinner Show</div>
+            <div class="rc-type">Multi-course gourmet + live theater · 8pm</div>
+          </div>
+        </div>
+        <div class="rc-desc">The standout romantic experience. Themed theatrical performances paired with gourmet dining. Different show weekly.</div>
+        <div class="rc-tags">
+          <span class="rtag rtag-red">Reservation Required</span>
+          <span class="rtag rtag-purple">Resort Elegant</span>
+        </div>
+      </div>
+
+      <div class="rc">
+        <div class="rc-top">
+          <span class="rc-icon">🍷</span>
+          <div>
+            <div class="rc-name">Bluemoon</div>
+            <div class="rc-type">À la carte · International · Dinner</div>
+          </div>
+        </div>
+        <div class="rc-desc">Intimate à la carte setting. Best for a romantic dinner without the show. Long trousers &amp; closed shoes for gentlemen.</div>
+        <div class="rc-tags">
+          <span class="rtag rtag-yellow">Walk-In OK</span>
+          <span class="rtag rtag-purple">Smart Casual</span>
+        </div>
+      </div>
+
+      <div class="rc">
+        <div class="rc-top">
+          <span class="rc-icon">🐟</span>
+          <div>
+            <div class="rc-name">Marlin</div>
+            <div class="rc-type">Beachfront · Seafood · Dinner</div>
+          </div>
+        </div>
+        <div class="rc-desc">Fresh fish &amp; seafood at the water's edge. Stunning sunset views. Great for Friday arrival night — relaxed, no reservations.</div>
+        <div class="rc-tags">
+          <span class="rtag rtag-green">No Reservation</span>
+        </div>
+      </div>
+
+      <div class="rc gold">
+        <div class="rc-top">
+          <span class="rc-icon">🥩</span>
+          <div>
+            <div class="rc-name">Steak House</div>
+            <div class="rc-type">À la carte · Premium Cuts · Dinner</div>
+          </div>
+        </div>
+        <div class="rc-desc">Quality steakhouse experience. Great for Monday night after Chukka. Reserve at check-in alongside Senses.</div>
+        <div class="rc-tags">
+          <span class="rtag rtag-red">Reservation Required</span>
+        </div>
+      </div>
+
+      <div class="rc">
+        <div class="rc-top">
+          <span class="rc-icon">🍳</span>
+          <div>
+            <div class="rc-name">Captain's Market</div>
+            <div class="rc-type">Buffet · Breakfast · Lunch · Dinner</div>
+          </div>
+        </div>
+        <div class="rc-desc">International buffet with show cooking. Your daily breakfast spot. Opens 7am — early enough before Saturday's drive.</div>
+        <div class="rc-tags">
+          <span class="rtag rtag-green">No Reservation · 7–11am</span>
+        </div>
+      </div>
+
+      <div class="rc">
+        <div class="rc-top">
+          <span class="rc-icon">🍱</span>
+          <div>
+            <div class="rc-name">+10 More Restaurants</div>
+            <div class="rc-type">Via Ocean Coral Spring Access</div>
+          </div>
+        </div>
+        <div class="rc-desc">Italian, Japanese teppanyaki, Indian, Jamaican, American &amp; more — all included with your Eden Bay stay.</div>
+        <div class="rc-tags">
+          <span class="rtag rtag-green">Included Access</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- AMENITIES + LOGISTICS ROW -->
+    <div class="p2-bottom">
+
+      <div class="p2-amenities">
+        <div class="p2-section-label">Amenities</div>
+        <div class="amenity-grid">
+          <div class="am">
+            <span class="am-icon">💪</span>
+            <div>
+              <div class="am-name">Gym · 24 Hours</div>
+              <div class="am-detail">Full equipment · yoga &amp; fitness classes · Workouts: Sat &amp; Mon 6am</div>
+            </div>
+          </div>
+          <div class="am">
+            <span class="am-icon">🌊</span>
+            <div>
+              <div class="am-name">Pools &amp; Beach · 7am–7pm</div>
+              <div class="am-detail">2 outdoor pools · swim-up bars · private white sand beach · beach volleyball</div>
+            </div>
+          </div>
+          <div class="am">
+            <span class="am-icon">💆</span>
+            <div>
+              <div class="am-name">Despacio Spa</div>
+              <div class="am-detail">Massage · hydrotherapy · sauna · steam · beauty — book Sunday afternoon</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p2-logistics">
+        <div class="p2-section-label">Key Logistics</div>
+        <div class="lg-grid">
+          <div class="lg">
+            <span class="lg-label">Saturday Drive</span>
+            <span class="lg-val">Cole's Chill Spot, St. Elizabeth is 1.5–2 hrs each way (south coast). Leave resort by 8am.</span>
+          </div>
+          <div class="lg">
+            <span class="lg-label">Martha Brae Rafting</span>
+            <span class="lg-val">~15–20 min from resort · $110/raft for 2 · 1 hr float · morning preferred</span>
+          </div>
+          <div class="lg">
+            <span class="lg-label">Chukka Good Hope</span>
+            <span class="lg-val">~10–15 min from resort · Book at chukka.com · 24hr cancellation penalty</span>
+          </div>
+          <div class="lg">
+            <span class="lg-label">MBJ Airport</span>
+            <span class="lg-val">~30–35 min from resort · Depart by 9:15am for 12:19pm flight on Tue Jul 28</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="p2-footer">
+    <span>Ocean Eden Bay · Adults Only · 5-Star All Inclusive · Coral Spring, Trelawny, Jamaica</span>
+    <span style="color:#444">·</span>
+    <span>Check-in Jul 24 · Check-out Jul 28 · 4 Nights · 2 Adults</span>
+    <span style="color:#444">·</span>
+    <span style="color:#FFD700">Ref: CN04-016395</span>
+  </div>
+
+</div><!-- /page2 -->
+
+</body>
+</html>

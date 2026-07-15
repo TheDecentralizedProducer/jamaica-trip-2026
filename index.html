@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Grants · Jamaica 2026</title>
+<style>
+  :root {
+    --black: #0A0A0A;
+    --gold: #FFD700;
+    --gold-dark: #C9A800;
+    --green: #006400;
+    --green-light: #1a8a1a;
+    --white: #FFFFFF;
+    --gray: #1E1E1E;
+    --gray-light: #2A2A2A;
+    --text-muted: #888;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--black);
+    text-align: center;
+    padding: 60px 20px 40px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 3px solid var(--gold);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(0,100,0,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 50%, rgba(255,215,0,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .flag-stripe {
+    display: flex;
+    height: 6px;
+    margin-bottom: 32px;
+  }
+  .flag-stripe span { flex: 1; }
+  .flag-stripe .s1 { background: var(--green); }
+  .flag-stripe .s2 { background: var(--gold); }
+  .flag-stripe .s3 { background: var(--black); border-top: 1px solid #333; border-bottom: 1px solid #333; }
+  .flag-stripe .s4 { background: var(--gold); }
+  .flag-stripe .s5 { background: var(--green); }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .hero-title {
+    font-size: clamp(48px, 10vw, 96px);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+  }
+
+  .hero-title .line1 { color: var(--white); }
+  .hero-title .line2 {
+    color: var(--gold);
+    -webkit-text-stroke: 2px var(--gold);
+  }
+  .hero-title .line3 {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--green-light);
+    font-size: clamp(28px, 6vw, 56px);
+    letter-spacing: 8px;
+    display: block;
+    margin-top: 8px;
+  }
+
+  .hero-meta {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta-item {
+    text-align: center;
+  }
+
+  .hero-meta-item .label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+  }
+
+  .hero-meta-item .value {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green), var(--gold));
+    margin: 24px auto 0;
+  }
+
+  /* ── NAV TABS ── */
+  .nav-tabs {
+    display: flex;
+    background: var(--gray);
+    border-bottom: 2px solid var(--gold);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-tab {
+    flex: 1;
+    padding: 16px 8px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--text-muted);
+    border: none;
+    background: none;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+  }
+
+  .nav-tab:hover { color: var(--white); }
+  .nav-tab.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+    background: rgba(255,215,0,0.05);
+  }
+
+  /* ── SECTIONS ── */
+  .section { display: none; padding: 40px 20px; max-width: 900px; margin: 0 auto; }
+  .section.active { display: block; }
+
+  .section-title {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .section-heading {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 32px;
+    letter-spacing: -1px;
+  }
+
+  /* ── PACKING LIST ── */
+  .progress-bar-wrap {
+    background: var(--gray-light);
+    border-radius: 100px;
+    height: 8px;
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--gold));
+    border-radius: 100px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .progress-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+  }
+  .progress-label span { color: var(--gold); font-weight: 700; }
+
+  .pack-person-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .person-tab {
+    padding: 8px 20px;
+    border-radius: 100px;
+    border: 2px solid var(--gray-light);
+    background: none;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .person-tab.active {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(255,215,0,0.08);
+  }
+
+  .pack-view { display: none; }
+  .pack-view.active { display: block; }
+
+  .pack-category {
+    margin-bottom: 28px;
+    background: var(--gray);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #2a2a2a;
+  }
+
+  .pack-category-header {
+    padding: 14px 20px;
+    background: var(--gray-light);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .pack-category-header .cat-count {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .pack-items { padding: 8px 0; }
+
+  .pack-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 11px 20px;
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+  }
+
+  .pack-item:hover { background: rgba(255,255,255,0.03); }
+
+  .pack-item input[type="checkbox"] { display: none; }
+
+  .pack-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #444;
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .pack-item.checked .pack-checkbox {
+    background: var(--green);
+    border-color: var(--green);
+  }
+
+  .pack-item.checked .pack-checkbox::after {
+    content: '✓';
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .pack-item-label {
+    font-size: 14px;
+    color: var(--white);
+    transition: color 0.2s;
+  }
+
+  .pack-item.checked .pack-item-label {
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+
+  .pack-item-tag {
+    margin-left: auto;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .tag-important {
+    background: rgba(255,215,0,0.15);
+    color: var(--gold);
+    border: 1px solid rgba(255,215,0,0.3);
+  }
+
+  .clear-btn {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 8px 20px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background: none;
+    color: var(--text-muted);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .clear-btn:hover { border-color: #666; color: var(--white); }
+
+  /* ── ITINERARY ── */
+  .day-card {
+    background: var(--gray);
+    border-radius: 16px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    border: 1px solid #2a2a2a;
+  }
+
+  .day-header {
+    padding: 20px 24px;
+    background: var(--gray-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .day-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+  }
+
+  .day-title {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+  }
+
+  .day-badge {
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .badge-arrival { background: rgba(0,100,0,0.3); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+  .badge-party { background: rgba(255,215,0,0.15); color: var(--gold); border: 1px solid rgba(255,215,0,0.3); }
+  .badge-adventure { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); }
+  .badge-chukka { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
+  .badge-departure { background: rgba(168,85,247,0.15); color: #c084fc; border: 1px solid rgba(192,132,252,0.3); }
+
+  .day-events { padding: 8px 0; }
+
+  .event {
+    display: flex;
+    gap: 20px;
+    padding: 14px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    align-items: flex-start;
+  }
+
+  .event:last-child { border-bottom: none; }
+
+  .event-time {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    min-width: 58px;
+    padding-top: 2px;
+    letter-spacing: 0.5px;
+  }
+
+  .event-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  .event-dot.gold { background: var(--gold); }
+  .event-dot.blue { background: #60a5fa; }
+  .event-dot.red { background: #f87171; }
+  .event-dot.purple { background: #c084fc; }
+
+  .event-content { flex: 1; }
+
+  .event-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .event-detail {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .event-chips {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-weight: 600;
+  }
+
+  .chip-drive { background: rgba(255,255,255,0.07); color: var(--text-muted); }
+  .chip-price { background: rgba(0,100,0,0.2); color: #4ade80; }
+  .chip-tip { background: rgba(255,215,0,0.1); color: var(--gold); }
+  .chip-dress { background: rgba(168,85,247,0.15); color: #c084fc; }
+
+  /* ── RESORT GUIDE ── */
+  .resort-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .resort-card {
+    background: var(--gray);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #2a2a2a;
+    border-top: 3px solid var(--green);
+  }
+
+  .resort-card.gold-accent { border-top-color: var(--gold); }
+  .resort-card.blue-accent { border-top-color: #60a5fa; }
+
+  .resort-card-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .resort-card-title {
+    font-size: 14px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .resort-card-sub {
+    font-size: 12px;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .resort-card-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .resort-card-tag {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .tag-res { background: rgba(239,68,68,0.2); color: #f87171; }
+  .tag-res2 { background: rgba(255,215,0,0.1); color: var(--gold); }
+  .tag-dress { background: rgba(168,85,247,0.15); color: #c084fc; }
+
+  /* ── PRINT BUTTON ── */
+  .print-bar {
+    background: var(--gray-light);
+    border-top: 2px solid var(--gold);
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    border-radius: 12px;
+  }
+
+  .print-bar p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .btn-print {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--black);
+    border: none;
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(255,215,0,0.3);
+  }
+
+  .btn-print:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255,215,0,0.4);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+    font-size: 12px;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  footer strong { color: var(--gold); }
+
+  /* ── PRINT-ONLY PAGE HEADER (hidden on screen) ── */
+  .print-page-header { display: none; }
+
+  /* Wrapper is invisible on screen — only activates in print */
+  .all-pack-views { display: block; }
+
+  /* ────────────────────────────────────────────────
+     PRINT STYLES  — triggered by window.print()
+  ──────────────────────────────────────────────── */
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+    body {
+      background: #fff !important;
+      color: #111 !important;
+      font-size: 11pt;
+    }
+
+    /* Hide everything that isn't content */
+    .hero { display: none !important; }
+    .nav-tabs { display: none !important; }
+    .pack-person-tabs { display: none !important; }
+    .clear-btn { display: none !important; }
+    .print-bar { display: none !important; }
+    .progress-bar-wrap { display: none !important; }
+    .progress-label { display: none !important; }
+    footer { display: none !important; }
+
+    /* Per-page compact header */
+    .print-page-header {
+      display: flex !important;
+      align-items: center;
+      justify-content: space-between;
+      background: #0A0A0A !important;
+      color: #fff !important;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+      border-bottom: 4px solid #FFD700 !important;
+    }
+    .print-page-header .ph-brand {
+      font-size: 13pt;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: #FFD700 !important;
+    }
+    .print-page-header .ph-section {
+      font-size: 9pt;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #aaa !important;
+    }
+    .print-page-header .ph-dates {
+      font-size: 9pt;
+      color: #888 !important;
+    }
+
+    /* All sections visible; packing + resort start on new pages */
+    .section { display: block !important; max-width: 100% !important; padding: 16px 20px !important; }
+    #packing  { display: none !important; }
+    #resort   { display: none !important; }
+
+    .section-title { color: #006400 !important; }
+    .section-heading { color: #111 !important; font-size: 24pt !important; }
+
+    /* Packing list print — all three views in a 3-column grid */
+    .all-pack-views {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr 1fr !important;
+      gap: 12px !important;
+      align-items: start !important;
+    }
+    .pack-view { display: block !important; }
+    .pack-category {
+      background: #f9f9f9 !important;
+      border: 1px solid #ddd !important;
+      break-inside: avoid;
+      margin-bottom: 12px !important;
+    }
+    .pack-category-header {
+      background: #0A0A0A !important;
+      color: #FFD700 !important;
+      padding: 10px 16px !important;
+    }
+    .pack-item-label { color: #111 !important; font-size: 10pt !important; }
+    .pack-item.checked .pack-item-label { color: #999 !important; }
+    .pack-checkbox {
+      border: 2px solid #aaa !important;
+      background: #fff !important;
+      width: 14px !important; height: 14px !important;
+    }
+    .pack-item.checked .pack-checkbox {
+      background: #006400 !important;
+      border-color: #006400 !important;
+    }
+    .tag-important { background: #fff8dc !important; color: #b8860b !important; border: 1px solid #daa520 !important; }
+
+    /* Itinerary print */
+    .day-card {
+      background: #f9f9f9 !important;
+      border: 1px solid #ddd !important;
+      break-inside: avoid;
+      margin-bottom: 16px !important;
+    }
+    .day-header { background: #0A0A0A !important; }
+    .day-label { color: #aaa !important; }
+    .day-title { color: #fff !important; font-size: 14pt !important; }
+    .event-time { color: #b8860b !important; }
+    .event-title { color: #111 !important; font-size: 10pt !important; }
+    .event-detail { color: #444 !important; font-size: 9pt !important; }
+    .event-dot { background: #006400 !important; }
+    .event-dot.gold { background: #FFD700 !important; }
+    .chip { font-size: 8pt !important; }
+    .chip-drive { background: #eee !important; color: #555 !important; }
+    .chip-price { background: #e8f5e9 !important; color: #1b5e20 !important; }
+    .chip-tip { background: #fff8dc !important; color: #b8860b !important; }
+    .chip-dress { background: #f3e5f5 !important; color: #6a1b9a !important; }
+
+    .badge-arrival { background: #e8f5e9 !important; color: #1b5e20 !important; border: 1px solid #4caf50 !important; }
+    .badge-party { background: #fff8dc !important; color: #b8860b !important; border: 1px solid #daa520 !important; }
+    .badge-adventure { background: #e3f2fd !important; color: #0d47a1 !important; border: 1px solid #1976d2 !important; }
+    .badge-chukka { background: #fce4ec !important; color: #880e4f !important; border: 1px solid #e91e63 !important; }
+    .badge-departure { background: #f3e5f5 !important; color: #4a148c !important; border: 1px solid #9c27b0 !important; }
+
+    /* Resort guide print */
+    .resort-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 10px !important; }
+    .resort-card {
+      background: #f9f9f9 !important;
+      border: 1px solid #ddd !important;
+      page-break-inside: avoid;
+    }
+    .resort-card-title { color: #111 !important; }
+    .resort-card-sub { color: #b8860b !important; }
+    .resort-card-desc { color: #444 !important; }
+    .tag-res { background: #fce4ec !important; color: #880e4f !important; }
+    .tag-res2 { background: #fff8dc !important; color: #b8860b !important; }
+    .tag-dress { background: #f3e5f5 !important; color: #4a148c !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="flag-stripe">
+    <span class="s1"></span><span class="s2"></span><span class="s3"></span><span class="s4"></span><span class="s5"></span>
+  </div>
+  <div class="hero-eyebrow">July 24 – 28, 2026 · Montego Bay, Jamaica</div>
+  <div class="hero-title">
+    <div class="line1">The</div>
+    <div class="line2">Grants</div>
+    <span class="line3">Jamaica</span>
+  </div>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="label">Outbound</span>
+      <span class="value">JFK → MBJ · 9:59am</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="label">Hotel</span>
+      <span class="value">Ocean Eden Bay · Trelawny</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="label">Return</span>
+      <span class="value">MBJ → JFK · 12:19pm</span>
+    </div>
+  </div>
+  <div class="hero-divider"></div>
+</header>
+
+<!-- ── TABS ── -->
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="switchTab('itinerary')">Itinerary</button>
+  <button class="nav-tab" onclick="switchTab('packing')">Packing</button>
+  <button class="nav-tab" onclick="switchTab('resort')">Resort Guide</button>
+</nav>
+
+<!-- ── ITINERARY SECTION ── -->
+<section id="itinerary" class="section active">
+  <div class="print-page-header">
+    <span class="ph-brand">The Grants · Jamaica 2026</span>
+    <span class="ph-section">Itinerary</span>
+    <span class="ph-dates">Jul 24–28 · Ocean Eden Bay</span>
+  </div>
+  <div class="section-title">Day by Day</div>
+  <h2 class="section-heading">The Itinerary</h2>
+
+  <!-- Friday -->
+  <div class="day-card">
+    <div class="day-header">
+      <div>
+        <div class="day-label">Friday · July 24</div>
+        <div class="day-title">Arrival Day</div>
+      </div>
+      <span class="day-badge badge-arrival">Touch Down</span>
+    </div>
+    <div class="day-events">
+      <div class="event">
+        <div class="event-time">9:59am</div>
+        <div class="event-dot gold"></div>
+        <div class="event-content">
+          <div class="event-title">Depart JFK — JetBlue B6 279</div>
+          <div class="event-detail">Nonstop · A321 · 4hr 15min flight</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">1:14pm</div>
+        <div class="event-dot"></div>
+        <div class="event-content">
+          <div class="event-title">Arrive Sangster International (MBJ)</div>
+          <div class="event-detail">Clear customs &amp; immigration — allow 30–45 min. Arrange ground transport to Runaway Bay.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">~2:45pm</div>
+        <div class="event-dot"></div>
+        <div class="event-content">
+          <div class="event-title">Runaway Bay — Family Gift Drop</div>
+          <div class="event-detail">Drop off gifts &amp; purchases with family. Spend time catching up.</div>
+          <div class="event-chips">
+            <span class="chip chip-drive">~39 min from MBJ</span>
+          </div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">~4:30pm</div>
+        <div class="event-dot"></div>
+        <div class="event-content">
+          <div class="event-title">Head to Ocean Eden Bay</div>
+          <div class="event-detail">~39 min drive from Runaway Bay to Coral Spring, Trelawny.</div>
+          <div class="event-chips">
+            <span class="chip chip-drive">Booking Ref: CN04-016395</span>
+            <span class="chip chip-tip">Request early check-in in advance</span>
+          </div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">~5:15pm</div>
+        <div class="event-dot gold"></div>
+        <div class="event-content">
+          <div class="event-title">Check In — Unpack — Exhale</div>
+          <div class="event-detail">Settle in, explore the resort, first look at the ocean.</div>
+          <div class="event-chips">
+            <span class="chip chip-tip">Book Senses Dinner Show &amp; Steak House at front desk tonight</span>
+          </div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">Evening</div>
+        <div class="event-dot"></div>
+        <div class="event-content">
+          <div class="event-title">Casual Dinner at Resort</div>
+          <div class="event-detail">Captain's Market (buffet) or Marlin (beachfront seafood) — no reservations needed.</div>
+          <div class="event-chips">
+            <span class="chip chip-dress">Smart casual dress code (no swimwear)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Saturday -->
+  <div class="day-card">
+    <div class="day-header">
+      <div>
+        <div class="day-label">Saturday · July 25</div>
+        <div class="day-title">Cole's Chill Spot — St. Elizabeth</div>
+      </div>
+      <span class="day-badge badge-party">Party Day</span>
+    </div>
+    <div class="day-events">
+      <div class="event">
+        <div class="event-time">6:00am</div>
+        <div class="event-dot"></div>
+        <div class="event-content">
+          <div class="event-title">Morning Workout</div>
+          <div class="event-detail">24-hour gym at Ocean Eden Bay. Get it done early — long day ahead.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">7:15am</div>
+        <div class="event-dot"></div>
+        <div class="event-content">
+          <div class="event-title">Breakfast — Captain's Market</div>
+          <div class="event-detail">Buffet opens 7am. Fuel up for the cross-island drive.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">8:00am</div>
+        <div class="event-dot gold"></div>
+        <div class="event-content">
+          <div class="event-title">Depart for St. Elizabeth</div>
+          <div class="event-detail">Top Burnt Ground, St. Elizabeth — cross-island drive through the hills.</div>
+          <div class="event-chips">
+            <span class="chip chip-drive">~1.5–2 hr drive (south coast)</span>
+            <span class="chip chip-tip">Bring snacks &amp; water for the road</span>
+          </div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">10:00am</div>
+        <div class="event-dot gold"></div>
+        <div class="event-content">
+          <div class="event-title">Cole's Chill Spot — Back to School Giveaway</div>
+          <div class="event-detail">Pool fun, bounce house, trampoline, food, prizes &amp; nuff giveaways. Full day party vibes at Top Burnt Ground, St. Elizabeth.</div>
+          <div class="event-chips">
+            <span class="chip chip-tip">Ends 6pm</span>
+          </div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">Evening</div>
+        <div class="event-dot gold"></div>
+        <div class="event-content">
+          <div class="event-title">Cole's Chill Spot — Spada International Sound</div>
+          <div class="event-detail">Annual evening party featuring Spada International Sound. Same venue.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">~11pm+</div>
+        <div class="event-dot"></div>
+        <div class="event-content">
+          <div class="event-title">Drive Back to Resort</div>
+          <div class="event-detail">~1.5–2 hr return drive. Arrange a driver if needed — long day.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sunday -->
+  <div class="day-card">
+    <div class="day-header">
+      <div>
+        <div class="day-label">Sunday · July 26</div>
+        <div class="day-title">River Rafting &amp; Romance</div>
+      </div>
+      <span class="day-badge badge-adventure">On the Water</span>
+    </div>
+    <div class="day-events">
+      <div class="event">
+        <div class="event-time">8:00am</div>
+        <div class="event-dot"></div>
+        <div class="event-content">
+          <div class="event-title">Breakfast at Resort</div>
+          <div class="event-detail">Leisurely morning — you earned it after Saturday. Captain's Market 7–11am.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">9:30am</div>
+        <div class="event-dot blue"></div>
+        <div class="event-content">
+          <div class="event-title">Depart for Martha Brae River Rafting</div>
+          <div class="event-detail">Falmouth, Trelawny — just down the road.</div>
+          <div class="event-chips">
+            <span class="chip chip-drive">~15–20 min from resort</span>
+          </div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">10:00am</div>
+        <div class="event-dot blue"></div>
+        <div class="event-content">
+          <div class="event-title">Martha Brae Bamboo River Rafting</div>
+          <div class="event-detail">Private raft for 2 with a captain. 3-mile scenic float down Jamaica's Martha Brae River through lush jungle. 1-hour experience.</div>
+          <div class="event-chips">
+            <span class="chip chip-price">~$110/raft (2 guests)</span>
+            <span class="chip chip-tip">Morning = cooler temps &amp; fewer crowds</span>
+          </div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">11:30am</div>
+        <div class="event-dot"></div>
+        <div class="event-content">
+          <div class="event-title">Return to Resort</div>
+          <div class="event-detail">Beach, pool, Despacio Spa — afternoon is yours.</div>
+          <div class="event-chips">
+            <span class="chip chip-tip">Book spa appointment at check-in</span>
+          </div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">Afternoon</div>
+        <div class="event-dot"></div>
+        <div class="event-content">
+          <div class="event-title">Pool · Beach · Despacio Spa</div>
+          <div class="event-detail">2 outdoor pools, swim-up bars, white sand beach, Despacio Spa (massage, hydrotherapy, sauna). Recharge before dinner.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">8:00pm</div>
+        <div class="event-dot gold"></div>
+        <div class="event-content">
+          <div class="event-title">Romantic Dinner — Senses Dinner Show</div>
+          <div class="event-detail">Multi-course gourmet dinner paired with live theatrical performance. The signature romantic experience at Ocean Eden Bay.</div>
+          <div class="event-chips">
+            <span class="chip chip-tip">Reservation required — book at check-in</span>
+            <span class="chip chip-dress">Resort Elegant attire required</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Monday -->
+  <div class="day-card">
+    <div class="day-header">
+      <div>
+        <div class="day-label">Monday · July 27</div>
+        <div class="day-title">Chukka Good Hope</div>
+      </div>
+      <span class="day-badge badge-chukka">Adventure Day</span>
+    </div>
+    <div class="day-events">
+      <div class="event">
+        <div class="event-time">6:00am</div>
+        <div class="event-dot"></div>
+        <div class="event-content">
+          <div class="event-title">Morning Workout</div>
+          <div class="event-detail">24-hour gym — last workout of the trip. Make it count.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">7:15am</div>
+        <div class="event-dot"></div>
+        <div class="event-content">
+          <div class="event-title">Breakfast — Captain's Market</div>
+          <div class="event-detail">Fuel up before a big adventure day. Buffet 7–11am.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">9:00am</div>
+        <div class="event-dot red"></div>
+        <div class="event-content">
+          <div class="event-title">Depart for Chukka Good Hope</div>
+          <div class="event-detail">Chukka Eco-Adventure Outpost at Good Hope, Falmouth, Trelawny.</div>
+          <div class="event-chips">
+            <span class="chip chip-drive">~10–15 min from resort</span>
+          </div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">9:30am</div>
+        <div class="event-dot red"></div>
+        <div class="event-content">
+          <div class="event-title">Chukka Ultimate Explorer Pass</div>
+          <div class="event-detail">Bamboo Rafting · Zipline · River Tubing · Free Dune Buggy — all in one package on 2,000+ acres of Jamaican jungle &amp; river. Tripadvisor Travelers' Choice 2026.</div>
+          <div class="event-chips">
+            <span class="chip chip-price">~$139+/person (~$278 total)</span>
+            <span class="chip chip-tip">Free pickup from Falmouth available</span>
+            <span class="chip chip-dress">Closed-toe shoes required for ATV/dune buggy</span>
+          </div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">~2:00pm</div>
+        <div class="event-dot"></div>
+        <div class="event-content">
+          <div class="event-title">Return to Resort</div>
+          <div class="event-detail">Last afternoon — beach, pool, pack light items, order from swim-up bar.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">Evening</div>
+        <div class="event-dot gold"></div>
+        <div class="event-content">
+          <div class="event-title">Final Romantic Dinner</div>
+          <div class="event-detail">Bluemoon (à la carte international, intimate) or Steak House (reservations required). Last night in Jamaica — make it memorable.</div>
+          <div class="event-chips">
+            <span class="chip chip-dress">Smart casual · Long trousers &amp; closed shoes for gentlemen</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tuesday -->
+  <div class="day-card">
+    <div class="day-header">
+      <div>
+        <div class="day-label">Tuesday · July 28</div>
+        <div class="day-title">Departure Day</div>
+      </div>
+      <span class="day-badge badge-departure">Homebound</span>
+    </div>
+    <div class="day-events">
+      <div class="event">
+        <div class="event-time">7:00am</div>
+        <div class="event-dot"></div>
+        <div class="event-content">
+          <div class="event-title">Final Breakfast</div>
+          <div class="event-detail">One last Jamaican breakfast at Captain's Market. Soak it all in.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">8:30am</div>
+        <div class="event-dot"></div>
+        <div class="event-content">
+          <div class="event-title">Check Out</div>
+          <div class="event-detail">Booking Ref: CN04-016395. Confirm bellhop for luggage. Resort phone: +1 876 615 8100</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">9:15am</div>
+        <div class="event-dot gold"></div>
+        <div class="event-content">
+          <div class="event-title">Depart for MBJ Sangster Airport</div>
+          <div class="event-detail">Coral Spring → MBJ airport.</div>
+          <div class="event-chips">
+            <span class="chip chip-drive">~30–35 min</span>
+            <span class="chip chip-tip">Arrive by 10am — 2+ hrs before 12:19pm flight</span>
+          </div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">10:00am</div>
+        <div class="event-dot"></div>
+        <div class="event-content">
+          <div class="event-title">Arrive MBJ — Check In &amp; Security</div>
+          <div class="event-detail">JetBlue B6 780 · Gate open well before departure.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">12:19pm</div>
+        <div class="event-dot gold"></div>
+        <div class="event-content">
+          <div class="event-title">Depart MBJ — JetBlue B6 780</div>
+          <div class="event-detail">Nonstop · A321 · 3hr 57min · Arrives JFK 5:16pm</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">5:16pm</div>
+        <div class="event-dot gold"></div>
+        <div class="event-content">
+          <div class="event-title">Arrive JFK — Back in New York</div>
+          <div class="event-detail">Welcome home, Grants. Until next time, Jamaica. 🇯🇲</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="print-bar">
+    <p>Save this itinerary as a PDF to print or share</p>
+    <button class="btn-print" onclick="window.print()">
+      ⬇ Save as PDF / Print
+    </button>
+  </div>
+</section>
+
+<!-- ── PACKING SECTION ── -->
+<section id="packing" class="section">
+  <div class="print-page-header">
+    <span class="ph-brand">The Grants · Jamaica 2026</span>
+    <span class="ph-section">Packing List</span>
+    <span class="ph-dates">Jul 24–28 · Ocean Eden Bay</span>
+  </div>
+  <div class="section-title">Before You Go</div>
+  <h2 class="section-heading">Packing List</h2>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progress-fill"></div>
+  </div>
+  <div class="progress-label"><span id="progress-text">0 / 0</span> items packed</div>
+
+  <div class="pack-person-tabs">
+    <button class="person-tab active" onclick="switchPerson('shared')">Shared</button>
+    <button class="person-tab" onclick="switchPerson('ian')">Ian</button>
+    <button class="person-tab" onclick="switchPerson('jay')">Jay</button>
+  </div>
+
+  <div class="all-pack-views">
+
+  <!-- SHARED LIST -->
+  <div class="pack-view active" id="pack-shared">
+
+    <div class="pack-category">
+      <div class="pack-category-header">
+        Documents &amp; Money
+        <span class="cat-count" id="count-shared-docs"></span>
+      </div>
+      <div class="pack-items">
+        <label class="pack-item" data-key="s-passport-ian">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Ian's passport</span>
+          <span class="pack-item-tag tag-important">Required</span>
+        </label>
+        <label class="pack-item" data-key="s-passport-jay">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Jay's passport</span>
+          <span class="pack-item-tag tag-important">Required</span>
+        </label>
+        <label class="pack-item" data-key="s-flights">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Flight confirmations (JetBlue B6 279 + B6 780)</span>
+        </label>
+        <label class="pack-item" data-key="s-hotel">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Hotel booking (Ref: CN04-016395)</span>
+        </label>
+        <label class="pack-item" data-key="s-insurance">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Travel insurance docs</span>
+        </label>
+        <label class="pack-item" data-key="s-usd">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">USD cash (tips, transport, Chukka)</span>
+        </label>
+        <label class="pack-item" data-key="s-jmd">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">JMD cash (local spending)</span>
+        </label>
+        <label class="pack-item" data-key="s-cards">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Credit / debit cards</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="pack-category">
+      <div class="pack-category-header">
+        Beach &amp; Sun
+        <span class="cat-count" id="count-shared-beach"></span>
+      </div>
+      <div class="pack-items">
+        <label class="pack-item" data-key="s-sunscreen">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Sunscreen SPF 50+ (reef-safe preferred)</span>
+          <span class="pack-item-tag tag-important">Must</span>
+        </label>
+        <label class="pack-item" data-key="s-aftersun">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">After-sun lotion / aloe vera</span>
+        </label>
+        <label class="pack-item" data-key="s-shades">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Sunglasses (bring 2 pairs)</span>
+        </label>
+        <label class="pack-item" data-key="s-hats">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Hats / caps</span>
+        </label>
+        <label class="pack-item" data-key="s-beachbag">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Beach bag</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="pack-category">
+      <div class="pack-category-header">
+        Health &amp; Toiletries
+        <span class="cat-count" id="count-shared-health"></span>
+      </div>
+      <div class="pack-items">
+        <label class="pack-item" data-key="s-bugs">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Mosquito repellent (DEET or Picaridin)</span>
+          <span class="pack-item-tag tag-important">Must</span>
+        </label>
+        <label class="pack-item" data-key="s-meds">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Prescription medications</span>
+        </label>
+        <label class="pack-item" data-key="s-otc">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Pain relievers, antacids, Pepto-Bismol</span>
+        </label>
+        <label class="pack-item" data-key="s-bandaids">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Band-aids &amp; blister pads (for Chukka)</span>
+        </label>
+        <label class="pack-item" data-key="s-sanitizer">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Hand sanitizer</span>
+        </label>
+        <label class="pack-item" data-key="s-toiletries">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Toiletries (shampoo, conditioner, body wash)</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="pack-category">
+      <div class="pack-category-header">
+        Electronics &amp; Extras
+        <span class="cat-count" id="count-shared-tech"></span>
+      </div>
+      <div class="pack-items">
+        <label class="pack-item" data-key="s-chargers">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Phone chargers (both)</span>
+        </label>
+        <label class="pack-item" data-key="s-powerbank">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Portable power bank</span>
+        </label>
+        <label class="pack-item" data-key="s-gopro">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">GoPro / waterproof camera</span>
+          <span class="pack-item-tag tag-important">For rafting + Chukka</span>
+        </label>
+        <label class="pack-item" data-key="s-waterproof">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Waterproof phone case / dry pouch</span>
+        </label>
+        <label class="pack-item" data-key="s-earbuds">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Earbuds / headphones (flight)</span>
+        </label>
+        <label class="pack-item" data-key="s-pillow">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Neck pillow (optional, 4hr flight)</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="pack-category">
+      <div class="pack-category-header">
+        Runaway Bay Family Gifts
+        <span class="cat-count" id="count-shared-gifts"></span>
+      </div>
+      <div class="pack-items">
+        <label class="pack-item" data-key="s-gifts">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">All gifts &amp; purchased items for family</span>
+          <span class="pack-item-tag tag-important">Pre-pack</span>
+        </label>
+        <label class="pack-item" data-key="s-gifts2">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Separate bag / tote for gift drop (keep out of main luggage)</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- IAN LIST -->
+  <div class="pack-view" id="pack-ian">
+    <div class="pack-category">
+      <div class="pack-category-header">
+        Ian's Clothing
+        <span class="cat-count" id="count-ian-clothes"></span>
+      </div>
+      <div class="pack-items">
+        <label class="pack-item" data-key="i-swim">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Swimwear (3–4 pairs)</span>
+        </label>
+        <label class="pack-item" data-key="i-casual">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Casual resort outfits — shorts &amp; tees (3–4 sets)</span>
+        </label>
+        <label class="pack-item" data-key="i-party">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Party outfit for Saturday (Cole's Chill Spot)</span>
+        </label>
+        <label class="pack-item" data-key="i-smartcasual">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Smart casual dinner outfits (2) — long trousers, sleeved shirt</span>
+          <span class="pack-item-tag tag-important">Bluemoon / Steak House</span>
+        </label>
+        <label class="pack-item" data-key="i-elegant">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Resort Elegant outfit — Senses Dinner Show</span>
+          <span class="pack-item-tag tag-important">Required</span>
+        </label>
+        <label class="pack-item" data-key="i-workout">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Workout clothes (2 sets — Sat &amp; Mon gym)</span>
+        </label>
+        <label class="pack-item" data-key="i-sneakers">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Closed-toe sneakers / athletic shoes</span>
+          <span class="pack-item-tag tag-important">Required for Chukka ATV</span>
+        </label>
+        <label class="pack-item" data-key="i-flips">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Flip flops / sandals</span>
+        </label>
+        <label class="pack-item" data-key="i-jacket">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Light jacket for flight</span>
+        </label>
+        <label class="pack-item" data-key="i-undies">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Underwear &amp; socks (5–6 days)</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAY LIST -->
+  <div class="pack-view" id="pack-jay">
+    <div class="pack-category">
+      <div class="pack-category-header">
+        Jay's Clothing
+        <span class="cat-count" id="count-jay-clothes"></span>
+      </div>
+      <div class="pack-items">
+        <label class="pack-item" data-key="j-swim">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Swimwear / bikinis (3–4 pieces)</span>
+        </label>
+        <label class="pack-item" data-key="j-coverups">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Cover-ups / sundresses (3–4)</span>
+        </label>
+        <label class="pack-item" data-key="j-party">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Party outfit for Saturday (Cole's Chill Spot)</span>
+        </label>
+        <label class="pack-item" data-key="j-smartcasual">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Smart casual dinner dresses (2)</span>
+          <span class="pack-item-tag tag-important">Bluemoon / Steak House</span>
+        </label>
+        <label class="pack-item" data-key="j-elegant">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Resort Elegant outfit — Senses Dinner Show</span>
+          <span class="pack-item-tag tag-important">Required</span>
+        </label>
+        <label class="pack-item" data-key="j-workout">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Workout clothes (2 sets — Sat &amp; Mon gym)</span>
+        </label>
+        <label class="pack-item" data-key="j-sneakers">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Closed-toe shoes / sneakers</span>
+          <span class="pack-item-tag tag-important">Required for Chukka ATV</span>
+        </label>
+        <label class="pack-item" data-key="j-sandals">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Sandals / flip flops</span>
+        </label>
+        <label class="pack-item" data-key="j-cardigan">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Light cardigan for flight</span>
+        </label>
+        <label class="pack-item" data-key="j-undies">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Underwear (5–6 days)</span>
+        </label>
+        <label class="pack-item" data-key="j-hair">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Hair care products / tools</span>
+        </label>
+        <label class="pack-item" data-key="j-makeup">
+          <input type="checkbox"><div class="pack-checkbox"></div>
+          <span class="pack-item-label">Makeup &amp; skincare essentials</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- /all-pack-views -->
+
+  <button class="clear-btn" onclick="clearAll()">Reset All Checkboxes</button>
+</section>
+
+<!-- ── RESORT GUIDE SECTION ── -->
+<section id="resort" class="section">
+  <div class="print-page-header">
+    <span class="ph-brand">The Grants · Jamaica 2026</span>
+    <span class="ph-section">Resort Guide</span>
+    <span class="ph-dates">Ocean Eden Bay · Trelawny</span>
+  </div>
+  <div class="section-title">Ocean Eden Bay</div>
+  <h2 class="section-heading">Resort Guide</h2>
+
+  <div class="resort-grid">
+    <div class="resort-card gold-accent">
+      <span class="resort-card-icon">🍽</span>
+      <div class="resort-card-title">Senses Dinner Show</div>
+      <div class="resort-card-sub">Best Romantic Dinner · 8pm</div>
+      <div class="resort-card-desc">Multi-course gourmet dinner with live theatrical performance. Themed shows weekly. The standout experience at Ocean Eden Bay.</div>
+      <span class="resort-card-tag tag-res">Reservation Required</span>
+      <span class="resort-card-tag tag-dress" style="margin-left:4px">Resort Elegant</span>
+    </div>
+
+    <div class="resort-card">
+      <span class="resort-card-icon">🥩</span>
+      <div class="resort-card-title">Bluemoon Restaurant</div>
+      <div class="resort-card-sub">À La Carte · International · Dinner</div>
+      <div class="resort-card-desc">Intimate à la carte setting with international signature cuisine. Perfect for a romantic dinner without the show. Smart casual dress required — long trousers and closed shoes for gentlemen.</div>
+      <span class="resort-card-tag tag-res2">Walk-In OK</span>
+    </div>
+
+    <div class="resort-card">
+      <span class="resort-card-icon">🐟</span>
+      <div class="resort-card-title">Marlin Restaurant</div>
+      <div class="resort-card-sub">Beachfront · Seafood · Dinner</div>
+      <div class="resort-card-desc">Beachfront dining specializing in fresh fish &amp; seafood. Perfect for sunset views and a relaxed romantic atmosphere. Great for Friday arrival night — no reservations needed.</div>
+      <span class="resort-card-tag tag-res2">No Reservation</span>
+    </div>
+
+    <div class="resort-card gold-accent">
+      <span class="resort-card-icon">🥩</span>
+      <div class="resort-card-title">Steak House</div>
+      <div class="resort-card-sub">À La Carte · Steakhouse · Dinner</div>
+      <div class="resort-card-desc">Premium steakhouse experience. À la carte with quality cuts. Great option for Monday night after Chukka. Reserve at check-in.</div>
+      <span class="resort-card-tag tag-res">Reservation Required</span>
+    </div>
+
+    <div class="resort-card">
+      <span class="resort-card-icon">🍳</span>
+      <div class="resort-card-title">Captain's Market</div>
+      <div class="resort-card-sub">Buffet · Breakfast + Lunch + Dinner</div>
+      <div class="resort-card-desc">International buffet with show cooking. Main buffet restaurant — your go-to for breakfast (7–11am) and quick meals. No dress code hassle.</div>
+      <span class="resort-card-tag tag-res2">No Reservation</span>
+    </div>
+
+    <div class="resort-card blue-accent">
+      <span class="resort-card-icon">💪</span>
+      <div class="resort-card-title">Fitness Center &amp; Gym</div>
+      <div class="resort-card-sub">Open 24 Hours</div>
+      <div class="resort-card-desc">24-hour gym with full equipment. Yoga &amp; fitness classes offered. Workouts scheduled for Saturday and Monday mornings at 6am before the day's activities.</div>
+    </div>
+
+    <div class="resort-card">
+      <span class="resort-card-icon">🌊</span>
+      <div class="resort-card-title">Pools &amp; Beach</div>
+      <div class="resort-card-sub">7am – 7pm Pool Hours</div>
+      <div class="resort-card-desc">2 outdoor pools with swim-up bars. Private beach access. Beach volleyball. Best beach time: Sunday afternoon after rafting and Monday after Chukka.</div>
+    </div>
+
+    <div class="resort-card gold-accent">
+      <span class="resort-card-icon">💆</span>
+      <div class="resort-card-title">Despacio Spa Centre</div>
+      <div class="resort-card-sub">Massage · Hydrotherapy · Sauna</div>
+      <div class="resort-card-desc">Full-service spa with massages (reflexology, deep-tissue), hydrotherapy, sauna, steam bath, and beauty treatments. Book Sunday afternoon after rafting for the perfect recovery.</div>
+      <span class="resort-card-tag tag-res">Book in Advance</span>
+    </div>
+
+    <div class="resort-card" style="border-top: 3px solid #60a5fa;">
+      <span class="resort-card-icon">🍝</span>
+      <div class="resort-card-title">La Locanda</div>
+      <div class="resort-card-sub">Italian · Ocean Coral Spring</div>
+      <div class="resort-card-desc">Classic Italian cuisine — pasta, risotto, and traditional favorites. Included with your Eden Bay stay via cross-resort access.</div>
+      <span class="resort-card-tag tag-res2">Included Access</span>
+    </div>
+
+    <div class="resort-card" style="border-top: 3px solid #60a5fa;">
+      <span class="resort-card-icon">🍣</span>
+      <div class="resort-card-title">Sakura</div>
+      <div class="resort-card-sub">Japanese · Teppanyaki · Ocean Coral Spring</div>
+      <div class="resort-card-desc">Japanese cuisine with teppanyaki grill experience. Great for a fun dinner — chefs cook tableside with flair.</div>
+      <span class="resort-card-tag tag-res2">Included Access</span>
+    </div>
+
+    <div class="resort-card" style="border-top: 3px solid #60a5fa;">
+      <span class="resort-card-icon">🇯🇲</span>
+      <div class="resort-card-title">Sugar Cane</div>
+      <div class="resort-card-sub">Jamaican · Ocean Coral Spring</div>
+      <div class="resort-card-desc">Authentic Jamaican cuisine — jerk chicken, ackee &amp; saltfish, rice &amp; peas. A must-visit for local flavor while on the island.</div>
+      <span class="resort-card-tag tag-res2">Included Access</span>
+    </div>
+
+    <div class="resort-card" style="border-top: 3px solid #60a5fa;">
+      <span class="resort-card-icon">🍛</span>
+      <div class="resort-card-title">Thali</div>
+      <div class="resort-card-sub">Indian · Ocean Coral Spring</div>
+      <div class="resort-card-desc">Indian cuisine with curries, tandoor dishes, and vegetarian options. Rich flavors for a change of pace from the resort staples.</div>
+      <span class="resort-card-tag tag-res2">Included Access</span>
+    </div>
+
+    <div class="resort-card" style="border-top: 3px solid #60a5fa;">
+      <span class="resort-card-icon">🍔</span>
+      <div class="resort-card-title">Route 66</div>
+      <div class="resort-card-sub">American · Ocean Coral Spring</div>
+      <div class="resort-card-desc">American comfort food — burgers, ribs, fries, and classic diner-style dishes. Good option for a casual, laid-back meal.</div>
+      <span class="resort-card-tag tag-res2">Included Access</span>
+    </div>
+
+    <div class="resort-card" style="border-top: 3px solid #60a5fa;">
+      <span class="resort-card-icon">🥗</span>
+      <div class="resort-card-title">Martha's Market</div>
+      <div class="resort-card-sub">Buffet · Ocean Coral Spring</div>
+      <div class="resort-card-desc">International buffet at Ocean Coral Spring — great alternative to Captain's Market with a different spread. All-day dining options.</div>
+      <span class="resort-card-tag tag-res2">Included Access</span>
+    </div>
+
+    <div class="resort-card" style="border-top: 3px solid #60a5fa;">
+      <span class="resort-card-icon">🍟</span>
+      <div class="resort-card-title">Ocean Burger</div>
+      <div class="resort-card-sub">Casual · Burgers &amp; Snacks · Ocean Coral Spring</div>
+      <div class="resort-card-desc">Casual quick-service spot for burgers, snacks, and bites between activities. Perfect for poolside hunger between swims.</div>
+      <span class="resort-card-tag tag-res2">Included Access</span>
+    </div>
+  </div>
+
+  <div class="pack-category" style="margin-bottom:32px">
+    <div class="pack-category-header" style="color:var(--gold)">Key Logistics</div>
+    <div class="pack-items" style="padding: 16px 20px;">
+      <p style="font-size:14px; margin-bottom:10px; color: var(--text-muted)"><strong style="color:var(--white)">Hotel Phone:</strong> +1 876 615 8100 · res.oeb@oceanhotels.com</p>
+      <p style="font-size:14px; margin-bottom:10px; color: var(--text-muted)"><strong style="color:var(--white)">Booking Ref:</strong> CN04-016395</p>
+      <p style="font-size:14px; margin-bottom:10px; color: var(--text-muted)"><strong style="color:var(--white)">Dinner Reservations:</strong> Book Senses Dinner Show + Steak House immediately at check-in on Friday</p>
+      <p style="font-size:14px; margin-bottom:10px; color: var(--text-muted)"><strong style="color:var(--white)">Chukka:</strong> Book Ultimate Explorer Pass in advance — chukka.com · 24hr cancellation penalty</p>
+      <p style="font-size:14px; margin-bottom:10px; color: var(--text-muted)"><strong style="color:var(--white)">River Rafting:</strong> Martha Brae, Falmouth — $110/raft for 2. No advance booking required but recommended.</p>
+      <p style="font-size:14px; color: var(--text-muted)"><strong style="color:var(--white)">Saturday Drive:</strong> St. Elizabeth is on the SOUTH coast — 1.5–2 hr drive each way. Leave by 8am sharp.</p>
+    </div>
+  </div>
+
+  <div class="print-bar">
+    <p>Save as PDF for printing or sharing with Jay</p>
+    <button class="btn-print" onclick="window.print()">
+      ⬇ Save as PDF / Print
+    </button>
+  </div>
+</section>
+
+<footer>
+  <strong>The Grants · Jamaica 2026</strong><br>
+  July 24–28 · Ocean Eden Bay · Montego Bay, Jamaica 🇯🇲
+</footer>
+
+<script>
+  // ── TAB SWITCHING ──
+  function switchTab(tab) {
+    document.querySelectorAll('.nav-tab').forEach((t, i) => {
+      t.classList.toggle('active', ['itinerary','packing','resort'][i] === tab);
+    });
+    document.querySelectorAll('.section').forEach(s => {
+      s.classList.toggle('active', s.id === tab);
+    });
+  }
+
+  // ── PERSON TAB SWITCHING ──
+  function switchPerson(person) {
+    document.querySelectorAll('.person-tab').forEach(t => {
+      t.classList.toggle('active', t.textContent.toLowerCase().trim() === (person === 'ian' ? 'ian' : person === 'jay' ? 'jay' : 'shared'));
+    });
+    document.querySelectorAll('.pack-view').forEach(v => {
+      v.classList.toggle('active', v.id === 'pack-' + person);
+    });
+  }
+
+  // ── CHECKBOX LOGIC + LOCALSTORAGE ──
+  const STORAGE_KEY = 'grants-jamaica-2026';
+
+  function loadState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
+  }
+
+  function saveState(state) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function updateProgress() {
+    const all = document.querySelectorAll('.pack-item');
+    const checked = document.querySelectorAll('.pack-item.checked');
+    const pct = all.length ? (checked.length / all.length * 100) : 0;
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = checked.length + ' / ' + all.length;
+
+    // Update category counts
+    document.querySelectorAll('.pack-category').forEach(cat => {
+      const items = cat.querySelectorAll('.pack-item');
+      const done = cat.querySelectorAll('.pack-item.checked');
+      const counter = cat.querySelector('.cat-count');
+      if (counter) counter.textContent = done.length + ' / ' + items.length;
+    });
+  }
+
+  function initChecklist() {
+    const state = loadState();
+    document.querySelectorAll('.pack-item').forEach(item => {
+      const key = item.dataset.key;
+      if (key && state[key]) item.classList.add('checked');
+
+      item.addEventListener('click', function(e) {
+        this.classList.toggle('checked');
+        const s = loadState();
+        s[this.dataset.key] = this.classList.contains('checked');
+        saveState(s);
+        updateProgress();
+      });
+    });
+    updateProgress();
+  }
+
+  function clearAll() {
+    if (!confirm('Reset all checkboxes?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    document.querySelectorAll('.pack-item').forEach(i => i.classList.remove('checked'));
+    updateProgress();
+  }
+
+  // ── INIT ──
+  document.addEventListener('DOMContentLoaded', initChecklist);
+</script>
+</body>
+</html>
